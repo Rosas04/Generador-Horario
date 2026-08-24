@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
 import './index.css';
 import { usePersistence } from './hooks/usePersistence';
-
+import { generateCombinations, filterAndRank } from './utils/scheduler';
 import CourseModal from './components/CourseModal';
 import CourseCard from './components/CourseCard';
 import CalendarGrid from './components/CalendarGrid';
