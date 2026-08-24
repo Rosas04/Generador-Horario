@@ -5,7 +5,7 @@ import { usePersistence } from './hooks/usePersistence';
 import CourseModal from './components/CourseModal';
 import CourseCard from './components/CourseCard';
 import CalendarGrid from './components/CalendarGrid';
-
+import PrefsPanel from './components/PrefsPanel';
 import { ToastContainer, useToast } from './components/Toast';
 
 const DEFAULT_PREFS = {
@@ -269,7 +269,7 @@ export default function App() {
       </main>
 
       {/* ── Panel de Preferencias ──────────────────────────────────────────── */}
-      
+      <PrefsPanel prefs={prefs} onChange={handlePrefChange} />
 
       {/* ── Modal ─────────────────────────────────────────────────────────── */}
       {showModal && (
