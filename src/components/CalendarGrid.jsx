@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { DAYS_ORDER, timeToMinutes } from '../utils/scheduler';
+import calendarImg from '../assets/calendar.png';
 
 const HOURS = Array.from({ length: 15 }, (_, i) => i + 7); // 7am a 9pm
 
@@ -34,10 +35,12 @@ export default function CalendarGrid({ schedule }) {
     return (
       <div className="calendar-grid" style={{ minHeight: '400px', flex: 1 }}>
         <div className="calendar-empty">
-          <div className="calendar-empty-icon"></div>
+          <div className="calendar-empty-icon">
+            <img src={calendarImg} alt="Calendario" style={{ width: '120px', opacity: 0.9 }} />
+          </div>
           <div className="calendar-empty-title">No hay horario generado</div>
           <div className="calendar-empty-sub">
-            Añade tus cursos y sus turnos, ajusta las preferencias y presiona <strong>Generar</strong>.
+            Define tus cursos y preferencias para ver tu horario.
           </div>
         </div>
       </div>
@@ -45,36 +48,36 @@ export default function CalendarGrid({ schedule }) {
   }
 
   const headerColors = {
-    'Lunes': '#e0f2fe',
-    'Martes': '#dcfce7',
-    'Miércoles': '#ffedd5',
-    'Jueves': '#fce7f3',
-    'Viernes': '#f3e8ff',
-    'Sábado': '#fef9c3',
+    'Lunes': 'rgba(224, 242, 254, 0.1)',
+    'Martes': 'rgba(220, 252, 231, 0.1)',
+    'Miércoles': 'rgba(255, 237, 213, 0.1)',
+    'Jueves': 'rgba(252, 231, 243, 0.1)',
+    'Viernes': 'rgba(243, 232, 255, 0.1)',
+    'Sábado': 'rgba(254, 249, 195, 0.1)',
   };
 
   return (
     <div className="calendar-grid" style={{ 
       boxShadow: 'var(--shadow-md)', 
-      border: '2px solid #cbd5e1', 
+      border: '1px solid var(--border-color)', 
       borderRadius: 'var(--radius-lg)',
       display: 'flex',
       flexDirection: 'column',
       flex: 1, // Ocupa todo el alto disponible en main-area
       minHeight: '500px', // Para que no se aplaste demasiado en pantallas muy chicas
-      overflow: 'hidden'
+      overflow: 'hidden',
+      background: 'var(--bg-primary)'
     }}>
       {/* Header con días */}
-      <div className="calendar-header" style={{ borderBottom: '2px solid #cbd5e1' }}>
-        <div className="calendar-day-header" style={{ fontSize: '0.8rem', fontFamily: 'Kalam, cursive', padding: '10px 8px' }}>Hora</div>
+      <div className="calendar-header" style={{ borderBottom: '1px solid var(--border-color)' }}>
+        <div className="calendar-day-header" style={{ fontSize: '0.8rem', padding: '10px 8px' }}>Hora</div>
         {DAYS_ORDER.map((day) => (
           <div key={day} className="calendar-day-header" style={{ 
             background: headerColors[day], 
-            fontFamily: 'Kalam, cursive', 
             fontSize: '1rem', 
             padding: '10px 8px',
-            color: '#334155',
-            borderRight: '2px solid #cbd5e1'
+            color: 'var(--text-primary)',
+            borderRight: '1px solid var(--border-color)'
           }}>
             {day}
           </div>
@@ -82,9 +85,9 @@ export default function CalendarGrid({ schedule }) {
       </div>
 
       {/* Body dinámico al 100% del espacio */}
-      <div style={{ display: 'grid', gridTemplateColumns: '64px repeat(6, 1fr)', background: '#fff', flex: 1, position: 'relative' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '64px repeat(6, 1fr)', background: 'var(--bg-primary)', flex: 1, position: 'relative' }}>
         {/* Columna de horas */}
-        <div style={{ borderRight: '2px solid #cbd5e1', position: 'relative' }}>
+        <div style={{ borderRight: '1px solid var(--border-color)', position: 'relative' }}>
           {HOURS.map((h) => {
             const topPercent = (((h - 7) * 60) / TOTAL_MINUTES) * 100;
             return (
@@ -97,13 +100,12 @@ export default function CalendarGrid({ schedule }) {
                   display: 'flex',
                   justifyContent: 'center',
                   fontSize: '0.75rem',
-                  fontFamily: 'Kalam, cursive',
                   color: 'var(--text-secondary)',
                   borderTop: '1px solid var(--border-color)', // Usar borderTop para alinear la línea con la hora
                 }}
               >
                 {/* El texto va desplazado hacia arriba para quedar centrado en la línea */}
-                <span style={{ transform: 'translateY(-50%)', background: '#fff', padding: '0 4px' }}>
+                <span style={{ transform: 'translateY(-50%)', background: 'var(--bg-primary)', padding: '0 4px' }}>
                   {`${h.toString().padStart(2, '0')}:00`}
                 </span>
               </div>

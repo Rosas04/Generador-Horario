@@ -1,32 +1,31 @@
-/* ─── Design System Variables ───────────────────────────────────────────────── */
 :root {
-  /* Paleta base de la aplicación (Color solicitado: #e4eaf2) */
-  --bg-primary: #e4eaf2;      /* Fondo principal */
-  --bg-secondary: #f1f5f9;    /* Fondo blanco para tarjetas y paneles */
-  --bg-card: #ffffff;
-  --bg-modal: #ffffff;
+  /* Dark Theme Palette */
+  --bg-primary: #15161C;      /* Main background (app) */
+  --bg-secondary: #1D1F27;    /* Panels background (main area, cards) */
+  --bg-card: #23252E;         /* Cards/modals */
+  --bg-modal: #1D1F27;
 
-  --accent-primary: #9baec4;
-  --accent-secondary: #c2d0e1;
+  --accent-primary: #4C82F6;  /* Blue accent */
+  --accent-secondary: #30549E;
   --accent-success: #10b981;
   --accent-warning: #f59e0b;
   --accent-danger: #ef4444;
-  --accent-gradient: linear-gradient(135deg, #9baec4, #c2d0e1);
+  --accent-gradient: linear-gradient(135deg, #4C82F6, #30549E);
 
-  --text-primary: #334155;    
-  --text-secondary: #64748b;
-  --text-muted: #94a3b8;
+  --text-primary: #FFFFFF;    
+  --text-secondary: #A1A1AA;  /* Muted text */
+  --text-muted: #71717A;
 
-  --border-color: #cbd5e1;    
-  --border-hover: rgba(155, 174, 196, 0.4);
+  --border-color: #2F313D;    /* Subtle dark border */
+  --border-hover: #4C82F6;
 
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.04);
-  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.06); /* Sombras modernas en vez de planas */
-  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.08);
-  --shadow-accent: 0 4px 10px rgba(155, 174, 196, 0.2);
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5);
+  --shadow-accent: 0 4px 10px rgba(76, 130, 246, 0.2);
 
-  --radius-sm: 6px;
-  --radius-md: 10px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
 
@@ -34,9 +33,9 @@
   --transition-med: 0.25s ease;
   --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
-  --header-height: 70px;
-  --sidebar-width: 320px;
-  --prefs-width: 280px;
+  --header-height: 64px;
+  --sidebar-width: 280px;
+  --prefs-width: 320px;
 }
 
 /* ─── Reset & Base ──────────────────────────────────────────────────────────── */
@@ -47,10 +46,6 @@ html { font-size: 15px; scroll-behavior: smooth; }
 body {
   font-family: 'Outfit', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-primary);
-  background-image: 
-    linear-gradient(90deg, rgba(200,0,0,0.03) 1px, transparent 1px),
-    linear-gradient(rgba(0,0,0,0.03) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 24px; /* Líneas de cuaderno */
   color: var(--text-primary);
   height: 100vh;
   overflow: hidden; /* Evitar scroll general */
@@ -134,8 +129,37 @@ body {
 /* ─── Botones ───────────────────────────────────────────────────────────────── */
 .btn {
   padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
-.btn-danger:hover { background: rgba(239,68,68,0.1); }
+.btn-primary {
+  background: transparent;
+  border: 1px solid #3e4a61;
+  color: var(--text-primary);
+}
+.btn-primary:hover { background: rgba(255, 255, 255, 0.05); }
+
+.btn-secondary {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+}
+.btn-secondary:hover { border-color: var(--text-secondary); }
+
+.btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--accent-danger);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+.btn-danger:hover { background: rgba(239, 68, 68, 0.2); }
 
 .btn-ghost {
   background: transparent;
@@ -144,7 +168,7 @@ body {
 }
 .btn-ghost:hover { color: var(--text-primary); background: var(--bg-card); }
 
-.btn-sm { padding: 5px 10px; font-size: 0.78rem; }
+.btn-sm { padding: 6px 12px; font-size: 0.75rem; }
 .btn-icon { padding: 6px; border-radius: var(--radius-sm); }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
 
@@ -272,7 +296,7 @@ body {
   grid-area: main;
   overflow-y: auto;
   min-height: 0; /* Arregla el scroll en CSS Grid */
-  padding: 16px;
+  padding: 24px;
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -387,14 +411,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 320px;
+  height: 100%;
   gap: 16px;
   color: var(--text-muted);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-color);
+  margin: 0;
 }
 
-.calendar-empty-icon { font-size: 4rem; opacity: 0.3; }
-.calendar-empty-title { font-size: 1rem; font-weight: 600; color: var(--text-secondary); }
-.calendar-empty-sub { font-size: 0.85rem; max-width: 280px; text-align: center; line-height: 1.6; }
+.calendar-empty-icon { font-size: 4rem; opacity: 0.5; }
+.calendar-empty-title { font-size: 1.1rem; font-weight: 600; color: var(--text-primary); }
+.calendar-empty-sub { font-size: 0.85rem; max-width: 320px; text-align: center; line-height: 1.6; }
 
 /* ─── Panel de Preferencias ─────────────────────────────────────────────────── */
 .prefs-panel {
@@ -719,25 +747,4 @@ body {
   .sidebar, .prefs-panel { border: none; border-top: 1px solid var(--border-color); }
 }
 
-/* === OVERRIDE USER COLORS === */
-.btn, .btn-primary, .btn-secondary, .btn-danger, .btn-ghost { 
-  background-color: #dbeafe !important; /* Color flat azul claro solicitado */
-  color: #1e293b !important; 
-  border: 1px solid #bfdbfe !important; 
-  box-shadow: none !important; 
-  border-radius: 6px !important;
-  font-weight: 500 !important;
-  text-shadow: none !important;
-  transition: all 0.2s ease !important;
-}
-.btn:hover, .btn-primary:hover, .btn-secondary:hover { 
-  background-color: #bfdbfe !important; 
-  box-shadow: none !important; 
-  transform: none !important;
-}
-.btn:active {
-  background-color: #93c5fd !important;
-  box-shadow: none !important;
-  transform: scale(0.98) !important;
-}
 

@@ -7,6 +7,7 @@ import CourseCard from './components/CourseCard';
 import CalendarGrid from './components/CalendarGrid';
 import PrefsPanel from './components/PrefsPanel';
 import { ToastContainer, useToast } from './components/Toast';
+import booksImg from './assets/books.png';
 
 const DEFAULT_PREFS = {
   maxDays: 'any',
@@ -137,7 +138,7 @@ export default function App() {
             onClick={handleGenerate}
             disabled={isGenerating || courses.length === 0}
           >
-            {isGenerating ? <><div className="spinner" /> Generando...</> : ' Generar horarios'}
+            {isGenerating ? <><div className="spinner" /> Generando...</> : '→ Generar horarios'}
           </button>
         </div>
       </header>
@@ -154,10 +155,11 @@ export default function App() {
         <div className="courses-list">
           {courses.length === 0 ? (
             <div className="empty-state">
-              <div className="empty-state-icon">📖</div>
+              <div className="empty-state-icon">
+                <img src={booksImg} alt="Libros" style={{ width: '80px', opacity: 0.8 }} />
+              </div>
               <div className="empty-state-text">
-                No hay cursos registrados.<br />
-                Presiona <strong>+ Añadir</strong> para comenzar.
+                Añade un curso para comenzar.
               </div>
             </div>
           ) : (
@@ -282,6 +284,10 @@ export default function App() {
 
       {/* ── Toasts ────────────────────────────────────────────────────────── */}
       <ToastContainer toasts={toasts} removeToast={removeToast} />
+
+      <div style={{ position: 'fixed', bottom: '8px', left: '50%', transform: 'translateX(-50%)', fontSize: '0.7rem', color: 'var(--text-muted)' }}>
+        Diseño por (Nombre de Estudio)
+      </div>
     </div>
   );
 }
